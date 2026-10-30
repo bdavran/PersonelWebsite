@@ -23,7 +23,10 @@ export function Resume() {
           />
           {hasCv && (
             <Button asChild size="lg" className="shrink-0">
-              <a href={`/${profile.cvFile}`} download="Baris-Davran-CV.pdf">
+              <a
+                href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${profile.cvFile}`}
+                download="Baris-Davran-CV.pdf"
+              >
                 <FileDown className="mr-2 size-4" aria-hidden="true" />
                 CV&apos;yi İndir
               </a>
