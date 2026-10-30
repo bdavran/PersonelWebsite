@@ -3,14 +3,22 @@ import { ArrowRight } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { profile } from "@/lib/portfolio-data"
+import type { SiteContent } from "@/lib/content"
 
 export type AvatarList = {
   image: string
   alt?: string
 }
 
-export default function HeroSection({ avatarList }: { avatarList: AvatarList[] }) {
+export default function HeroSection({
+  avatarList,
+  content,
+}: {
+  avatarList: AvatarList[]
+  content: SiteContent
+}) {
+  const { hero, profile } = content
+
   return (
     <section id="home" className="relative isolate scroll-mt-16 overflow-hidden">
       {/* Faded grid backdrop */}
@@ -29,26 +37,24 @@ export default function HeroSection({ avatarList }: { avatarList: AvatarList[] }
         </Badge>
 
         <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Kurumsal süreçleri{" "}
-          <span className="text-muted-foreground">güvenilir ve hızlı</span>{" "}
-          yazılımlara dönüştürüyorum.
+          {hero.titleStart}{" "}
+          <span className="text-muted-foreground">{hero.titleHighlight}</span>{" "}
+          {hero.titleEnd}
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">
-          Merhaba, ben {profile.name}. Bankacılık, üretim ve kurumsal BT
-          alanlarında .NET, Oracle PL/SQL ve SAPUI5 ile uçtan uca çözümler
-          geliştiriyorum.
+          {hero.intro}
         </p>
 
         <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button size="lg" asChild>
             <a href="#apps">
-              Projelerimi Gör
+              {hero.primaryCta}
               <ArrowRight className="ml-2 size-4" aria-hidden="true" />
             </a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#resume">Özgeçmişim</a>
+            <a href="#resume">{hero.secondaryCta}</a>
           </Button>
         </div>
 
@@ -66,10 +72,8 @@ export default function HeroSection({ avatarList }: { avatarList: AvatarList[] }
             ))}
           </div>
           <div className="text-left text-sm">
-            <p className="font-semibold">
-              {profile.stats[0].value} yıl deneyim
-            </p>
-            <p className="text-muted-foreground">Bankacılık · Üretim · Mobil</p>
+            <p className="font-semibold">{hero.proofTitle}</p>
+            <p className="text-muted-foreground">{hero.proofSubtitle}</p>
           </div>
         </div>
       </div>

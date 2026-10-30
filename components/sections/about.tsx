@@ -3,17 +3,16 @@ import { MapPin } from "lucide-react"
 import { SectionHeading } from "@/components/sections/section-heading"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { profile, skillGroups } from "@/lib/portfolio-data"
+import type { SiteContent } from "@/lib/content"
 
-export function About() {
+export function About({ content }: { content: SiteContent }) {
+  const { about, profile, skillGroups } = content
+
   return (
     <section id="about" className="scroll-mt-16 py-20 md:py-28">
       <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
         <div>
-          <SectionHeading
-            eyebrow="Hakkımda"
-            title="Bankacılıktan üretime, kurumsal yazılımlar geliştiriyorum."
-          />
+          <SectionHeading eyebrow={about.eyebrow} title={about.title} />
           <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
             <MapPin className="size-4" aria-hidden="true" />
             {profile.location}
@@ -27,7 +26,6 @@ export function About() {
           <dl className="mt-10 grid grid-cols-3 gap-4 border-t pt-8">
             {profile.stats.map((stat) => (
               <div key={stat.label} className="flex flex-col justify-between">
-
                 <dt className="text-sm text-muted-foreground">{stat.label}</dt>
                 <dd className="mt-1 text-3xl font-semibold tracking-tight">
                   {stat.value}
@@ -38,8 +36,8 @@ export function About() {
         </div>
 
         <div className="grid content-start gap-4 sm:grid-cols-2">
-          {skillGroups.map(({ title, icon: Icon, skills }) => (
-            <Card key={title}>
+          {skillGroups.map(({ id, title, icon: Icon, skills }) => (
+            <Card key={id}>
               <CardHeader>
                 <div className="mb-2 flex size-9 items-center justify-center rounded-md bg-muted">
                   <Icon className="size-4" aria-hidden="true" />

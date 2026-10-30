@@ -6,29 +6,30 @@ import { SectionHeading } from "@/components/sections/section-heading"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { certifications, education, experience, profile } from "@/lib/portfolio-data"
+import { site, type SiteContent } from "@/lib/content"
 
-export function Resume() {
+export function Resume({ content }: { content: SiteContent }) {
+  const { resume, experience, education, certifications } = content
   // The download button only appears once the PDF has been placed in public/.
-  const hasCv = existsSync(path.join(process.cwd(), "public", profile.cvFile))
+  const hasCv = existsSync(path.join(process.cwd(), "public", site.cvFile))
 
   return (
     <section id="resume" className="scroll-mt-16 border-t py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading
-            eyebrow="Özgeçmiş"
-            title="Deneyim ve eğitim"
-            description="Bankacılık yazılımından üretim sistemlerine ve kurumsal BT altyapısına uzanan yolculuğum."
+            eyebrow={resume.eyebrow}
+            title={resume.title}
+            description={resume.description}
           />
           {hasCv && (
             <Button asChild size="lg" className="shrink-0">
               <a
-                href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${profile.cvFile}`}
-                download="Baris-Davran-CV.pdf"
+                href={`${process.env.NEXT_PUBLIC_BASE_PATH}/${site.cvFile}`}
+                download={site.cvDownloadName}
               >
                 <FileDown className="mr-2 size-4" aria-hidden="true" />
-                CV&apos;yi İndir
+                {resume.downloadCv}
               </a>
             </Button>
           )}
@@ -71,7 +72,7 @@ export function Resume() {
                 <div className="mb-2 flex size-9 items-center justify-center rounded-md bg-muted">
                   <GraduationCap className="size-4" aria-hidden="true" />
                 </div>
-                <CardTitle>Eğitim</CardTitle>
+                <CardTitle>{resume.education}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-1">
                 <p className="font-medium">{education.school}</p>
@@ -87,7 +88,7 @@ export function Resume() {
                 <div className="mb-2 flex size-9 items-center justify-center rounded-md bg-muted">
                   <Award className="size-4" aria-hidden="true" />
                 </div>
-                <CardTitle>Sertifikalar</CardTitle>
+                <CardTitle>{resume.certifications}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2">

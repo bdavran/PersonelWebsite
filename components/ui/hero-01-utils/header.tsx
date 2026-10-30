@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { CodeXml, Menu } from "lucide-react"
+import { CodeXml, Languages, Menu } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,7 +20,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { profile } from "@/lib/portfolio-data"
+import type { Lang, SiteContent } from "@/lib/content"
+import { langPaths } from "@/lib/content/paths"
 import { cn } from "@/lib/utils"
 
 export type NavigationSection = {
@@ -57,10 +58,51 @@ function useActiveSection(navigationData: NavigationSection[]) {
   return active
 }
 
+// Links to the same page in the other language, keeping the visitor on the
+// section they were reading.
+function LanguageSwitch({
+  lang,
+  labels,
+  className,
+}: {
+  lang: Lang
+  labels: SiteContent["header"]
+  className?: string
+}) {
+  const target: Lang = lang === "tr" ? "en" : "tr"
+  const href = `${process.env.NEXT_PUBLIC_BASE_PATH}${langPaths[target]}`
+
+  return (
+    <Button asChild variant="ghost" size="sm" className={className}>
+      <a
+        href={href}
+        hrefLang={target}
+        lang={target}
+        aria-label={labels.switchLanguageLabel}
+        onClick={(event) => {
+          event.preventDefault()
+          window.location.assign(href + window.location.hash)
+        }}
+      >
+        <Languages className="mr-1.5 size-4" aria-hidden="true" />
+        {labels.switchLanguage}
+      </a>
+    </Button>
+  )
+}
+
 export default function Header({
   navigationData,
+  lang,
+  name,
+  role,
+  labels,
 }: {
   navigationData: NavigationSection[]
+  lang: Lang
+  name: string
+  role: string
+  labels: SiteContent["header"]
 }) {
   const active = useActiveSection(navigationData)
 
@@ -71,10 +113,10 @@ export default function Header({
           <span className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
             <CodeXml className="size-4" aria-hidden="true" />
           </span>
-          {profile.name}
+          {name}
         </a>
 
-        <NavigationMenu className="hidden md:flex">
+        <NavigationMenu className="hidden lg:flex">
           <NavigationMenuList>
             {navigationData.map((item) => (
               <NavigationMenuItem key={item.href}>
@@ -95,22 +137,24 @@ export default function Header({
           </NavigationMenuList>
         </NavigationMenu>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <LanguageSwitch lang={lang} labels={labels} />
+
           <Button asChild className="hidden sm:inline-flex">
-            <a href="#contact">İletişime Geç</a>
+            <a href="#contact">{labels.contactCta}</a>
           </Button>
 
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
+              <Button variant="ghost" size="icon" className="lg:hidden">
                 <Menu className="size-5" />
-                <span className="sr-only">Menüyü aç</span>
+                <span className="sr-only">{labels.openMenu}</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="flex flex-col">
               <SheetHeader>
-                <SheetTitle>{profile.name}</SheetTitle>
-                <SheetDescription>{profile.role}</SheetDescription>
+                <SheetTitle>{name}</SheetTitle>
+                <SheetDescription>{role}</SheetDescription>
               </SheetHeader>
               <nav className="mt-4 flex flex-col gap-1">
                 {navigationData.map((item) => (
@@ -130,7 +174,7 @@ export default function Header({
               </nav>
               <SheetClose asChild>
                 <Button asChild className="mt-auto">
-                  <a href="#contact">İletişime Geç</a>
+                  <a href="#contact">{labels.contactCta}</a>
                 </Button>
               </SheetClose>
             </SheetContent>

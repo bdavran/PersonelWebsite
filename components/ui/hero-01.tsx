@@ -21,39 +21,43 @@ import BrandSlider, {
   BrandList,
 } from "@/components/ui/hero-01-utils/brand-slider";
 import type { AvatarList } from "@/components/ui/hero-01-utils/hero";
-import { apps } from "@/lib/portfolio-data";
+import { getContent, site, type Lang } from "@/lib/content";
 
 export default function DeveloperHeroSection({
+  lang = "tr",
   children,
 }: {
+  lang?: Lang;
   children?: React.ReactNode;
 }) {
-  // App screenshots shown as the overlapping avatar stack in the hero.
-  const avatarList: AvatarList[] = apps.slice(0, 4).map((app) => ({
-    image: app.image,
-    alt: app.name,
+  const content = getContent(lang);
+
+  // Project images shown as the overlapping avatar stack in the hero.
+  const avatarList: AvatarList[] = content.projects.slice(0, 4).map((project) => ({
+    image: project.image,
+    alt: project.name,
   }));
 
   const navigationData: NavigationSection[] = [
     {
-      title: "Ana Sayfa",
+      title: content.nav.home,
       href: "#home",
       isActive: true,
     },
     {
-      title: "Hakkımda",
+      title: content.nav.about,
       href: "#about",
     },
     {
-      title: "Özgeçmiş",
+      title: content.nav.resume,
       href: "#resume",
     },
     {
-      title: "Uygulamalarım",
+      title: content.nav.projects,
       href: "#apps",
     },
     {
-      title: "İletişim",
+      title: content.nav.contact,
       href: "#contact",
     },
   ];
@@ -76,10 +80,16 @@ export default function DeveloperHeroSection({
 
   return (
     <div className="relative">
-      <Header navigationData={navigationData} />
+      <Header
+        navigationData={navigationData}
+        lang={lang}
+        name={site.name}
+        role={content.profile.role}
+        labels={content.header}
+      />
       <main>
-        <HeroSection avatarList={avatarList} />
-        <BrandSlider brandList={brandList} />
+        <HeroSection avatarList={avatarList} content={content} />
+        <BrandSlider brandList={brandList} label={content.techStrip.label} />
         {children}
       </main>
     </div>

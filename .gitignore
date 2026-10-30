@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# original CV with private contact details; the public copy is public/cv.pdf
+/cv/
