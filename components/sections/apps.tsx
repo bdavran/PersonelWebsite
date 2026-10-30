@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowUpRight, Download } from "lucide-react"
+import { ArrowUpRight, Briefcase, Download } from "lucide-react"
 
 import { SectionHeading } from "@/components/sections/section-heading"
 import { Badge } from "@/components/ui/badge"
@@ -20,8 +20,8 @@ export function Apps() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="Uygulamalarım"
-          title="Geliştirdiğim ve yayına aldığım ürünler"
-          description="Fikir aşamasından mağazaya kadar tasarlayıp kodladığım uygulamalardan bir seçki."
+          title="Geliştirdiğim uygulamalar ve projeler"
+          description="Bankacılık, üretim ve mobil alanlarında geliştirdiğim ya da implementasyonunda yer aldığım projelerden bir seçki."
           align="center"
         />
 
@@ -60,18 +60,35 @@ export function Apps() {
                 </ul>
               </CardContent>
               <CardFooter className="gap-2">
-                <Button asChild variant="outline" size="sm" className="flex-1">
-                  <a href={app.detailsHref}>
-                    İncele
-                    <ArrowUpRight className="ml-1.5 size-4" aria-hidden="true" />
-                  </a>
-                </Button>
-                <Button asChild size="sm" className="flex-1">
-                  <a href={app.downloadHref}>
-                    İndir
-                    <Download className="ml-1.5 size-4" aria-hidden="true" />
-                  </a>
-                </Button>
+                {app.detailsHref || app.downloadHref ? (
+                  <>
+                    {app.detailsHref && (
+                      <Button asChild variant="outline" size="sm" className="flex-1">
+                        <a href={app.detailsHref}>
+                          İncele
+                          <ArrowUpRight className="ml-1.5 size-4" aria-hidden="true" />
+                        </a>
+                      </Button>
+                    )}
+                    {app.downloadHref && (
+                      <Button asChild size="sm" className="flex-1">
+                        <a href={app.downloadHref}>
+                          İndir
+                          <Download className="ml-1.5 size-4" aria-hidden="true" />
+                        </a>
+                      </Button>
+                    )}
+                  </>
+                ) : (
+                  // Enterprise projects have no public link, so show where they were built.
+                  <div className="flex w-full items-center justify-between gap-2 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5 font-medium text-foreground">
+                      <Briefcase className="size-3.5" aria-hidden="true" />
+                      {app.company}
+                    </span>
+                    <span>{app.period}</span>
+                  </div>
+                )}
               </CardFooter>
             </Card>
           ))}

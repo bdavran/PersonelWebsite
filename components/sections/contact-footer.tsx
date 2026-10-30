@@ -12,12 +12,6 @@ import {
 } from "@/components/ui/card"
 import { profile, socialLinks } from "@/lib/portfolio-data"
 
-// cacheComponents forbids a bare `new Date()` during prerender; caching keeps the page static.
-async function CopyrightYear() {
-  "use cache"
-  return new Date().getFullYear()
-}
-
 export function ContactFooter() {
   return (
     <footer id="contact" className="scroll-mt-16 border-t">
@@ -27,7 +21,7 @@ export function ContactFooter() {
             <SectionHeading
               eyebrow="İletişim"
               title="Aklınızda bir proje mi var?"
-              description="Yeni bir uygulama, freelance iş birliği ya da sadece merhaba demek için bana yazın. Genellikle 24 saat içinde dönüş yapıyorum."
+              description="İş birliği, yeni bir proje ya da sadece merhaba demek için bana yazabilirsiniz."
             />
 
             <a
@@ -66,7 +60,7 @@ export function ContactFooter() {
 
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t pt-8 text-sm text-muted-foreground sm:flex-row">
           <p>
-            © <CopyrightYear /> {profile.name}. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} {profile.name}. Tüm hakları saklıdır.
           </p>
           <a href="#home" className="hover:text-foreground">
             Başa dön ↑

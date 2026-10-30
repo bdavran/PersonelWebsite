@@ -1,16 +1,17 @@
 import {
-  Atom,
-  Bird,
-  Container,
+  Boxes,
+  Braces,
+  Cloud,
+  Code,
+  Coffee,
+  Cpu,
   Database,
   FileCode,
-  Flame,
   GitBranch,
-  Hexagon,
-  PenTool,
-  Terminal,
-  Triangle,
-  Wind,
+  Hash,
+  LayoutDashboard,
+  Server,
+  Smartphone,
 } from "lucide-react";
 
 import HeroSection from "@/components/ui/hero-01-utils/hero";
@@ -44,6 +45,10 @@ export default function DeveloperHeroSection({
       href: "#about",
     },
     {
+      title: "Özgeçmiş",
+      href: "#resume",
+    },
+    {
       title: "Uygulamalarım",
       href: "#apps",
     },
@@ -54,18 +59,19 @@ export default function DeveloperHeroSection({
   ];
 
   const brandList: BrandList[] = [
-    { name: "React", icon: Atom },
-    { name: "Next.js", icon: Triangle },
+    { name: "C#", icon: Hash },
+    { name: ".NET", icon: Boxes },
+    { name: "Oracle PL/SQL", icon: Database },
+    { name: "SAPUI5", icon: LayoutDashboard },
+    { name: "SAP HANA", icon: Server },
     { name: "TypeScript", icon: FileCode },
-    { name: "Swift", icon: Bird },
-    { name: "Node.js", icon: Hexagon },
-    { name: "Python", icon: Terminal },
-    { name: "Tailwind CSS", icon: Wind },
-    { name: "PostgreSQL", icon: Database },
-    { name: "Firebase", icon: Flame },
-    { name: "Docker", icon: Container },
+    { name: "JavaScript", icon: Braces },
+    { name: "Azure", icon: Cloud },
+    { name: "Xamarin", icon: Smartphone },
+    { name: "Java", icon: Coffee },
+    { name: "C++", icon: Cpu },
+    { name: "HTML5 & CSS", icon: Code },
     { name: "Git", icon: GitBranch },
-    { name: "Figma", icon: PenTool },
   ];
 
   return (
