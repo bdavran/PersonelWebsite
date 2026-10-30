@@ -27,7 +27,7 @@ export function ContactFooter() {
             <SectionHeading
               eyebrow="İletişim"
               title="Aklınızda bir proje mi var?"
-              description="Yeni bir uygulama, freelance iş birliği ya da sadece merhaba demek için bana yazın. Genellikle 24 saat içinde dönüş yapıyorum."
+              description="İş birliği, yeni bir proje ya da sadece merhaba demek için bana yazabilirsiniz."
             />
 
             <a

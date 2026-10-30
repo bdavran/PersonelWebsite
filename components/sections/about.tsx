@@ -12,7 +12,7 @@ export function About() {
         <div>
           <SectionHeading
             eyebrow="Hakkımda"
-            title="Tasarım ile kodun buluştuğu yerde çalışıyorum."
+            title="Bankacılıktan üretime, kurumsal yazılımlar geliştiriyorum."
           />
           <p className="mt-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
             <MapPin className="size-4" aria-hidden="true" />
@@ -26,7 +26,8 @@ export function About() {
 
           <dl className="mt-10 grid grid-cols-3 gap-4 border-t pt-8">
             {profile.stats.map((stat) => (
-              <div key={stat.label}>
+              <div key={stat.label} className="flex flex-col justify-between">
+
                 <dt className="text-sm text-muted-foreground">{stat.label}</dt>
                 <dd className="mt-1 text-3xl font-semibold tracking-tight">
                   {stat.value}

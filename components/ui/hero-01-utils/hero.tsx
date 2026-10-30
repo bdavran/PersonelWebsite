@@ -25,29 +25,30 @@ export default function HeroSection({ avatarList }: { avatarList: AvatarList[] }
             <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75 motion-reduce:animate-none" />
             <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
           </span>
-          Yeni projelere açığım
+          {profile.currentPosition}
         </Badge>
 
         <h1 className="text-4xl font-semibold tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Fikirleri{" "}
-          <span className="text-muted-foreground">kullanıcıların sevdiği</span>{" "}
-          uygulamalara dönüştürüyorum.
+          Kurumsal süreçleri{" "}
+          <span className="text-muted-foreground">güvenilir ve hızlı</span>{" "}
+          yazılımlara dönüştürüyorum.
         </h1>
 
         <p className="mt-6 max-w-2xl text-lg text-pretty text-muted-foreground">
-          Merhaba, ben {profile.name}. {profile.role} olarak web ve mobil için
-          hızlı, erişilebilir ve şık ürünler tasarlayıp geliştiriyorum.
+          Merhaba, ben {profile.name}. Bankacılık, üretim ve kurumsal BT
+          alanlarında .NET, Oracle PL/SQL ve SAPUI5 ile uçtan uca çözümler
+          geliştiriyorum.
         </p>
 
         <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
           <Button size="lg" asChild>
             <a href="#apps">
-              Uygulamalarımı Gör
+              Projelerimi Gör
               <ArrowRight className="ml-2 size-4" aria-hidden="true" />
             </a>
           </Button>
           <Button size="lg" variant="outline" asChild>
-            <a href="#contact">İletişime Geç</a>
+            <a href="#resume">Özgeçmişim</a>
           </Button>
         </div>
 
@@ -65,8 +66,10 @@ export default function HeroSection({ avatarList }: { avatarList: AvatarList[] }
             ))}
           </div>
           <div className="text-left text-sm">
-            <p className="font-semibold">{profile.stats[1].value} yayında uygulama</p>
-            <p className="text-muted-foreground">App Store, Google Play ve Web</p>
+            <p className="font-semibold">
+              {profile.stats[0].value} yıl deneyim
+            </p>
+            <p className="text-muted-foreground">Bankacılık · Üretim · Mobil</p>
           </div>
         </div>
       </div>
